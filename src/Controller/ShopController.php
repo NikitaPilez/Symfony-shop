@@ -2,11 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Product;
+use http\Env\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class BlogController extends AbstractController
+class ShopController extends AbstractController
 {
 
     /**
@@ -15,24 +17,27 @@ class BlogController extends AbstractController
 
     public function index()
     {
-        $number = random_int(0, 100);
+        $products = $this->getDoctrine()
+            ->getRepository(Product::class)
+            ->findAll();
 
         return $this->render('base.html.twig', [
-            'number' => $number,
+            'products' => $products,
         ]);
     }
 
     /**
-     * @Route("/category/{categoryName}", methods="GET",  requirements={"categoryName"="\d+"})
+     * @Route("/category/{categoryId}", methods="GET",  requirements={"categoryId"="\d+"}, name="category")
+     * @param $categoryId
      */
 
-    public function categoryIndex()
+    public function categoryIndex($categoryId)
     {
 
     }
 
     /**
-     * @Route("/product/{productName}", methods="GET",  requirements={"productName"="\d+"})
+     * @Route("/product/{productId}", methods="GET",  requirements={"productId"="\d+"}, name="product")
      */
 
     public function productIndex()

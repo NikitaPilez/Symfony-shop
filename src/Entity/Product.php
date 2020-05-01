@@ -20,7 +20,7 @@ class Product
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="products")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $category_id;
+    private $category;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -33,12 +33,12 @@ class Product
     private $price;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $color;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer")
      */
     private $count;
 
@@ -47,14 +47,14 @@ class Product
         return $this->id;
     }
 
-    public function getCategoryId(): ?Category
+    public function getCategory(): ?Category
     {
-        return $this->category_id;
+        return $this->category;
     }
 
-    public function setCategoryId(?Category $category_id): self
+    public function setCategory(?Category $category): self
     {
-        $this->category_id = $category_id;
+        $this->category = $category;
 
         return $this;
     }
@@ -88,7 +88,7 @@ class Product
         return $this->color;
     }
 
-    public function setColor(?string $color): self
+    public function setColor(string $color): self
     {
         $this->color = $color;
 
@@ -100,7 +100,7 @@ class Product
         return $this->count;
     }
 
-    public function setCount(?int $count): self
+    public function setCount(int $count): self
     {
         $this->count = $count;
 
