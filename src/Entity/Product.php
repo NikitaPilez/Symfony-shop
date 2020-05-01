@@ -38,6 +38,11 @@ class Product
     private $color;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $photo;
+
+    /**
      * @ORM\Column(type="integer")
      */
     private $count;
@@ -91,6 +96,18 @@ class Product
     public function setColor(string $color): self
     {
         $this->color = $color;
+
+        return $this;
+    }
+
+    public function getPhoto(): ?string
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto(string $photo): self
+    {
+        $this->photo = $photo;
 
         return $this;
     }

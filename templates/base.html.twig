@@ -11,11 +11,9 @@
     <body>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
-        <div class="container">
-            <div class="row">
-                {{ include('main.html.twig') }}
-            </div>
-        </div>
+
+        {% block content %}{% endblock %}
+
         <script src="{{ asset('js/bootstrap.bundle.js') }}"></script>
         <script src="{{ asset('js/bootstrap.js') }}"></script>
     </body>
