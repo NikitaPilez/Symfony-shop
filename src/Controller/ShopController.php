@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Entity\Message;
 use App\Entity\Product;
-use http\Env\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -65,11 +68,33 @@ class ShopController extends AbstractController
     }
 
     /**
-     * @Route("/contact", methods="GET")
+     * @Route("/contact", name="message")
      */
 
-    public function contactIndex()
+    public function contactIndex(Request $request)
     {
+        $message = new Message();
+        $form = $this->createFormBuilder($message)
+            ->add('email', TextType::class)
+            ->add('name', TextType::class)
+            ->add('message', TextType::class)
+            ->add('save', SubmitType::class, ['label' => 'Send message'])
+            ->getForm();
 
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $message = $form->getData();
+
+             $entityManager = $this->getDoctrine()->getManager();
+             $entityManager->persist($message);
+             $entityManager->flush();
+
+            return $this->redirectToRoute('message');
+        }
+
+        return $this->render('message.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }

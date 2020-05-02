@@ -31,11 +31,6 @@ class Message
      */
     private $message;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $time;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -73,18 +68,6 @@ class Message
     public function setMessage(string $message): self
     {
         $this->message = $message;
-
-        return $this;
-    }
-
-    public function getTime(): ?string
-    {
-        return $this->time;
-    }
-
-    public function setTime(string $time): self
-    {
-        $this->time = $time;
 
         return $this;
     }

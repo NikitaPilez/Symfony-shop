@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+    <div class="row m-auto flex-column col-md-6 p-5">
+        {{ form_start(form) }}
+        <div class="form-group">
+            <label for="formGroupExampleInput">Enter email</label>
+            {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder' : 'youremail@gmail.com', 'type' : 'email'}}) }}
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput">Enter name</label>
+            {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder' : 'Nikita'}}) }}
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput">Enter message</label>
+            {{ form_widget(form.message, {'attr': {'class': 'form-control', 'placeholder' : 'It is all good'}}) }}
+        </div>
+        {{ form_widget(form.save, {'attr' : {'class' : 'btn btn-primary'}}) }}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
